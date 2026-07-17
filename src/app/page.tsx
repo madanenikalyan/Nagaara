@@ -12,10 +12,14 @@ import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import StickyCTA from "@/components/ui/StickyCTA";
+import CustomCursor from "@/components/ui/CustomCursor";
+import GrainOverlay from "@/components/ui/GrainOverlay";
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative">
+      <CustomCursor />
+      <GrainOverlay />
       <Navbar />
       <Hero />
       <Legacy />
