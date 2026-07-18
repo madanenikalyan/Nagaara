@@ -73,6 +73,26 @@ export default function Contact() {
       });
 
       if (res.ok) {
+        // Also save to CRM database
+        fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            business: formData.business,
+            service: formData.service || null,
+            message: formData.message || null,
+            source: "form",
+            utmSource: utm.utm_source || null,
+            utmMedium: utm.utm_medium || null,
+            utmCampaign: utm.utm_campaign || null,
+            utmTerm: utm.utm_term || null,
+            utmContent: utm.utm_content || null,
+          }),
+        }).catch(() => {});
+
         setSubmitted(true);
         setFormData({
           name: "",

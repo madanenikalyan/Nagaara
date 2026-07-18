@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("client") // "admin" or "client"
+  createdAt DateTime @default(now())
+  clients   Client[]
+}
+
+model Client {
+  id        String     @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  business  String
+  status    String     @default("active") // "active", "inactive", "lead"
+  notes     String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    String?
+  user      User?      @relation(fields: [userId], references: [id])
+  campaigns Campaign[]
+  leads     Lead[]
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  business      String?
+  service       String?
+  message       String?
+  source        String?  // "form", "whatsapp", "meta_ads", "google_ads"
+  utmSource     String?
+  utmMedium     String?
+  utmCampaign   String?
+  utmTerm       String?
+  utmContent    String?
+  status        String   @default("new") // "new", "contacted", "converted", "lost"
+  notes         String?
+  createdAt     DateTime @default(now())
+  clientId      String?
+  client        Client?  @relation(fields: [clientId], references: [id])
+}
+
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  platform    String   // "meta", "google", "youtube", "other"
+  status      String   @default("active") // "active", "paused", "completed"
+  budget      Float?
+  spent       Float?   @default(0)
+  impressions Int?     @default(0)
+  clicks      Int?     @default(0)
+  leads       Int?     @default(0)
+  conversions Int?     @default(0)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  clientId    String
+  client      Client   @relation(fields: [clientId], references: [id])
+}
