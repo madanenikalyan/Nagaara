@@ -17,7 +17,7 @@ import GrainOverlay from "@/components/ui/GrainOverlay";
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative site-wrapper">
       <CustomCursor />
       <GrainOverlay />
       <Navbar />

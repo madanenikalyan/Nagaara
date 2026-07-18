@@ -153,14 +153,12 @@ select option {
   border-color: rgba(245, 158, 11, 0.15);
 }
 
-/* Hide default cursor when custom cursor is active */
-@media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-  a, button, [data-cursor-hover], input, textarea, select {
-    cursor: none;
-  }
+/* Hide default cursor on main site only */
+.site-wrapper {
+  cursor: none;
+}
+.site-wrapper a, .site-wrapper button, .site-wrapper [data-cursor-hover], .site-wrapper input, .site-wrapper textarea, .site-wrapper select {
+  cursor: none;
 }
 
 /* Premium focus states */
