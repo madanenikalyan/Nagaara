@@ -58,7 +58,7 @@ export default function Founder() {
             <span className="text-[#F59E0B]">Also Real Experience.</span>
           </h2>
           <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">
-            NAGAARA isn&apos;t built on nostalgia alone. Kalyan Pavan brings
+            NAGAARA isn&apos;t built on nostalgia alone. Pavan Kalyan brings
             hands-on corporate marketing experience from{" "}
             <span className="text-white font-medium">Dell</span> — combining
             enterprise-grade strategy with 40 years of local business trust.

@@ -91,7 +91,7 @@ const jsonLd = {
   url: siteUrl,
   founder: {
     "@type": "Person",
-    name: "Kalyan Pavan",
+    name: "Pavan Kalyan",
   },
   serviceType: [
     "Meta Ads Management",

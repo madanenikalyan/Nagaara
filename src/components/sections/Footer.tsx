@@ -121,7 +121,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} NAGAARA. All rights reserved.
           </p>
           <p className="text-[#94A3B8]/30 text-xs">
-            Founded by Kalyan Pavan — Continuing the legacy of Nagaraju.
+            Founded by Pavan Kalyan — Continuing the legacy of Nagaraju.
           </p>
         </div>
       </div>
