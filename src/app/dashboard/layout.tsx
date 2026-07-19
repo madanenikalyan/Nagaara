@@ -42,8 +42,12 @@ export default function DashboardLayout({
         }`}
       >
         <div className="p-6 border-b border-white/5">
-          <Link href="/dashboard" className="text-xl font-bold text-white font-['Space_Grotesk']">
-            NAGAARA
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <img
+              src="/images/Logo.png"
+              alt="NAGAARA"
+              className="h-8 w-auto"
+            />
           </Link>
           <p className="text-xs text-[#94A3B8] mt-1">CRM Dashboard</p>
         </div>
@@ -96,7 +100,11 @@ export default function DashboardLayout({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <span className="text-white font-bold font-['Space_Grotesk']">NAGAARA</span>
+          <img
+            src="/images/Logo.png"
+            alt="NAGAARA"
+            className="h-6 w-auto"
+          />
           <div className="w-10" />
         </div>
 

@@ -41,9 +41,11 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#05070C] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white font-['Space_Grotesk']">
-            NAGAARA
-          </h1>
+          <img
+            src="/images/Logo.png"
+            alt="NAGAARA"
+            className="h-12 w-auto mx-auto mb-2"
+          />
           <p className="text-[#94A3B8] mt-2">CRM Dashboard</p>
         </div>
 

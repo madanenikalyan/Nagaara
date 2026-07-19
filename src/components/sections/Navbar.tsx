@@ -41,14 +41,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <a href="#home" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#D97706] flex items-center justify-center shadow-lg shadow-[#F59E0B]/20 group-hover:shadow-[#F59E0B]/30 transition-shadow">
-              <span className="text-black font-bold text-lg font-[family-name:var(--font-space-grotesk)]">
-                N
-              </span>
-            </div>
-            <span className="text-xl font-bold text-white tracking-tight font-[family-name:var(--font-space-grotesk)]">
-              NAGAARA
-            </span>
+            <img
+              src="/images/Logo.png"
+              alt="NAGAARA"
+              className="h-10 w-auto"
+            />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
