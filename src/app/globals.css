@@ -180,3 +180,18 @@ select option {
   background: rgba(245, 158, 11, 0.25);
   color: #ffffff;
 }
+
+/* Anti-copy protections */
+.site-wrapper {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.site-wrapper img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+.site-wrapper a img,
+.site-wrapper button img {
+  pointer-events: auto;
+}

@@ -80,6 +80,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/Favicon.png",
   },
+  other: {
+    "copyright": "© 2026 NAGAARA. All rights reserved. Founded by Pavan Kalyan.",
+    "author": "Pavan Kalyan",
+  },
 };
 
 const jsonLd = {
@@ -154,6 +158,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#05070C] text-white">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.addEventListener('contextmenu',function(e){if(e.target.closest('.site-wrapper'))e.preventDefault();});`,
+          }}
+        />
         {children}
       </body>
     </html>
