@@ -19,25 +19,6 @@ export default function OurRoots() {
       <div className="absolute inset-0 bg-[#0A0D15]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/20 to-transparent" />
 
-      {/* Legacy photo watermark */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          style={{ y: photoY }}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          <Image
-            src="/images/nagaraju-legacy.jpeg"
-            alt=""
-            width={1200}
-            height={800}
-            className="w-full h-full object-cover opacity-[0.025]"
-            style={{ filter: "grayscale(100%) brightness(1.5)" }}
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0D15] via-transparent to-[#0A0D15]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0D15] via-transparent to-[#0A0D15]" />
-      </div>
-
       <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -71,11 +52,21 @@ export default function OurRoots() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="group"
           >
-            <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl p-8 h-full backdrop-blur-sm hover:border-[#F59E0B]/20 transition-all duration-500 relative overflow-hidden">
-              {/* Background glow */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#F59E0B]/[0.03] rounded-full blur-[80px]" />
+            <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl h-full backdrop-blur-sm hover:border-[#F59E0B]/20 transition-all duration-500 relative overflow-hidden">
+              {/* Father photo watermark */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <Image
+                  src="/images/nagaraju-legacy.jpeg"
+                  alt=""
+                  width={500}
+                  height={400}
+                  className="w-full h-full object-cover opacity-[0.08]"
+                  style={{ filter: "grayscale(100%) brightness(1.2) contrast(1.1)" }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-b from-[#10141F]/80 via-[#10141F]/60 to-[#10141F]/90" />
 
-              <div className="relative">
+              <div className="relative p-8">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex items-center justify-center">
                     <Volume2 className="w-7 h-7 text-[#F59E0B]" />
@@ -121,11 +112,16 @@ export default function OurRoots() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="group"
           >
-            <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl p-8 h-full backdrop-blur-sm hover:border-[#2563EB]/20 transition-all duration-500 relative overflow-hidden">
-              {/* Background glow */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#2563EB]/[0.03] rounded-full blur-[80px]" />
+            <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl h-full backdrop-blur-sm hover:border-[#2563EB]/20 transition-all duration-500 relative overflow-hidden">
+              {/* Dell logo watermark */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span className="text-[180px] md:text-[220px] font-bold text-white/[0.03] font-[family-name:var(--font-space-grotesk)] select-none leading-none">
+                  DELL
+                </span>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-b from-[#10141F]/80 via-[#10141F]/60 to-[#10141F]/90" />
 
-              <div className="relative">
+              <div className="relative p-8">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 rounded-xl bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center">
                     <Briefcase className="w-7 h-7 text-[#2563EB]" />
