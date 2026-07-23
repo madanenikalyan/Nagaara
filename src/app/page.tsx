@@ -5,6 +5,7 @@ import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
 import Impact from "@/components/sections/Impact";
 import WhyNagaara from "@/components/sections/WhyNagaara";
+import OurRoots from "@/components/sections/OurRoots";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -25,6 +26,7 @@ export default function Home() {
       <Process />
       <Impact />
       <WhyNagaara />
+      <OurRoots />
       <FAQ />
       <Contact />
       <Footer />
