@@ -125,9 +125,9 @@ export default function Legacy() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
         <SectionHeading
-          tag="Our Legacy"
-          title="The Story Behind NAGAARA"
-          description="Every great business deserves to be heard. This belief drove one man for four decades — and now drives an entire agency."
+          tag="Our Roots"
+          title="Where It All Began"
+          description="Before NAGAARA, there was a man, a loudspeaker, and a mission to help businesses get heard. That 40-year legacy is the foundation everything is built on."
         />
 
         {/* Premium photo showcase with parallax */}

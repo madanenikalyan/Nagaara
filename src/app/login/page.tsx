@@ -42,7 +42,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img
-            src="/images/Logo.png"
+            src="/images/LOGO.jpeg"
             alt="NAGAARA"
             className="h-12 w-auto mx-auto mb-2"
           />

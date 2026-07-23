@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           <a href="#home" className="flex items-center gap-3 group">
             <img
-              src="/images/Logo.png"
+              src="/images/LOGO.jpeg"
               alt="NAGAARA"
               className="h-10 w-auto"
             />

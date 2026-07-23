@@ -22,13 +22,13 @@ export default function Home() {
       <GrainOverlay />
       <Navbar />
       <Hero />
-      <Legacy />
       <Founder />
       <Transformation />
       <Services />
       <Process />
       <WhyNagaara />
       <Impact />
+      <Legacy />
       <FAQ />
       <Contact />
       <Footer />

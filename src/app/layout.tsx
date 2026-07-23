@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/Favicon.png",
+    icon: "/images/Favicon.jpeg",
   },
   other: {
     "copyright": "© 2026 NAGAARA. All rights reserved. Founded by Pavan Kalyan.",

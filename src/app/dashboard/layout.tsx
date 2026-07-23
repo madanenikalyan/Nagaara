@@ -44,7 +44,7 @@ export default function DashboardLayout({
         <div className="p-6 border-b border-white/5">
           <Link href="/dashboard" className="flex items-center gap-2">
             <img
-              src="/images/Logo.png"
+              src="/images/LOGO.jpeg"
               alt="NAGAARA"
               className="h-8 w-auto"
             />
@@ -101,7 +101,7 @@ export default function DashboardLayout({
             </svg>
           </button>
           <img
-            src="/images/Logo.png"
+            src="/images/LOGO.jpeg"
             alt="NAGAARA"
             className="h-6 w-auto"
           />

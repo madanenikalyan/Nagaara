@@ -20,7 +20,7 @@ export default function Footer() {
           >
             <div className="flex items-center gap-3 mb-6">
               <img
-                src="/images/Logo.png"
+                src="/images/LOGO.jpeg"
                 alt="NAGAARA"
                 className="h-10 w-auto"
               />
