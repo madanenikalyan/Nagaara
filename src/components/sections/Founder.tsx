@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Award, TrendingUp, Users } from "lucide-react";
+import { Briefcase, Award, TrendingUp, Users, BarChart3, Target } from "lucide-react";
 
 const experiences = [
   {
@@ -24,10 +24,17 @@ const experiences = [
   },
   {
     icon: Award,
-    title: "Corporate + Legacy = NAGAARA",
+    title: "Corporate Discipline",
     description:
-      "Combine world-class corporate marketing discipline with 40 years of local business understanding — something no other agency offers.",
+      "World-class corporate marketing discipline applied to every client campaign — something no other local agency offers.",
   },
+];
+
+const expertise = [
+  { icon: Target, label: "Meta Ads" },
+  { icon: BarChart3, label: "Google Ads" },
+  { icon: TrendingUp, label: "Analytics" },
+  { icon: Users, label: "Strategy" },
 ];
 
 export default function Founder() {
@@ -53,15 +60,15 @@ export default function Founder() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
-            Not Just a Legacy.
+            Corporate Expertise.
             <br />
-            <span className="text-[#F59E0B]">Also Real Experience.</span>
+            <span className="text-[#F59E0B]">Local Business Results.</span>
           </h2>
           <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">
-            NAGAARA isn&apos;t built on nostalgia alone. Pavan Kalyan brings
-            hands-on corporate marketing experience from{" "}
-            <span className="text-white font-medium">Dell</span> — combining
-            enterprise-grade strategy with 40 years of local business trust.
+            NAGAARA combines hands-on corporate marketing experience from{" "}
+            <span className="text-white font-medium">Dell</span> with deep
+            understanding of local business needs — delivering enterprise-grade
+            strategy to help your business grow.
           </p>
         </motion.div>
 
@@ -99,11 +106,12 @@ export default function Founder() {
           className="mt-12 text-center"
         >
           <div className="inline-flex items-center gap-3 bg-[#10141F]/60 border border-white/[0.06] rounded-full px-6 py-3 backdrop-blur-sm">
-            <span className="text-2xl">🔊</span>
+            <span className="text-2xl">🚀</span>
             <span className="text-[#94A3B8] text-sm">
-              Father&apos;s <span className="text-[#F59E0B] font-medium">40 years</span> of
-              legacy + Son&apos;s <span className="text-[#2563EB] font-medium">Dell</span> experience ={" "}
-              <span className="text-white font-medium">NAGAARA</span>
+              <span className="text-[#2563EB] font-medium">Dell</span> experience +{" "}
+              <span className="text-[#F59E0B] font-medium">Meta Ads</span> +{" "}
+              <span className="text-[#10B981] font-medium">Google Ads</span> ={" "}
+              <span className="text-white font-medium">Your Growth</span>
             </span>
           </div>
         </motion.div>

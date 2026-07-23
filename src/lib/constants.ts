@@ -10,15 +10,12 @@ import {
   Zap,
   Headphones,
   Settings,
-  Search,
-  Rocket,
-  LineChart,
-  BarChart,
+  Phone,
+  CheckCircle,
+  ArrowRight,
+  Eye,
   Brain,
   Handshake,
-  Lightbulb,
-  Eye,
-  Phone,
 } from "lucide-react";
 
 export const SITE_URL = "https://nagaara.com";
@@ -29,9 +26,9 @@ export const PHONE_DISPLAY = "+91 95811 84697";
 
 export const NAV_LINKS = [
   { label: "Home", href: "#home" },
-  { label: "Legacy", href: "#legacy" },
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
+  { label: "Results", href: "#results" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -108,169 +105,70 @@ export const SERVICES = [
       "Sales Pipeline Management",
     ],
   },
-  {
-    icon: Target,
-    title: "Conversion Tracking",
-    description:
-      "Every click, every lead, every sale — tracked and attributed so you know exactly what works.",
-    features: [
-      "Meta Pixel & CAPI Setup",
-      "Google Tag Manager",
-      "UTM Tracking & Attribution",
-      "Custom Conversion Events",
-    ],
-  },
-  {
-    icon: BarChart3,
-    title: "Marketing Analytics",
-    description:
-      "Clear, actionable reports that show you exactly where your money goes and what it brings back.",
-    features: [
-      "Custom Dashboard Reporting",
-      "Weekly Performance Reports",
-      "Revenue Attribution",
-      "Competitor Benchmarking",
-    ],
-  },
-  {
-    icon: Phone,
-    title: "Local Business Marketing",
-    description:
-      "Hyper-local strategies designed for businesses that serve a specific area or community.",
-    features: [
-      "Google My Business Optimization",
-      "Local SEO & Maps",
-      "Geo-Targeted Ad Campaigns",
-      "Local Review Management",
-    ],
-  },
 ];
 
 export const PROCESS_STEPS = [
   {
     number: 1,
-    title: "Understand Your Business",
+    title: "Free Strategy Call",
     description:
-      "We deep-dive into your goals, audience, challenges, and market position before spending a single rupee.",
-    icon: Lightbulb,
+      "We understand your business, goals, and challenges in a quick 15-minute call. No sales pitch — just honest advice.",
+    icon: Phone,
   },
   {
     number: 2,
-    title: "Research Your Audience",
+    title: "Custom Growth Plan",
     description:
-      "Who are your customers? Where do they hang out online? What makes them click? We find out.",
-    icon: Eye,
+      "We create a tailored marketing strategy with clear KPIs, budget allocation, and expected outcomes.",
+    icon: Target,
   },
   {
     number: 3,
-    title: "Analyze Competitors",
+    title: "Launch & Optimize",
     description:
-      "We study what works in your industry, find gaps, and build strategies that set you apart.",
-    icon: Search,
+      "We launch your campaigns, track every metric, and optimize daily to maximize your ROI.",
+    icon: Zap,
   },
   {
     number: 4,
-    title: "Build Landing Page",
+    title: "Scale & Grow",
     description:
-      "A fast, beautiful, high-converting page that turns visitors into leads and leads into customers.",
-    icon: Layout,
-  },
-  {
-    number: 5,
-    title: "Set Up Campaigns",
-    description:
-      "Precision campaign setup across Meta, Google, or both — with tracking, pixels, and automation in place.",
-    icon: Settings,
-  },
-  {
-    number: 6,
-    title: "Launch & Deliver",
-    description:
-      "Campaigns go live. Leads start flowing. Your phone starts ringing.",
-    icon: Rocket,
-  },
-  {
-    number: 7,
-    title: "Optimize Daily",
-    description:
-      "We monitor, test, tweak, and improve every day — because great marketing is never static.",
-    icon: LineChart,
-  },
-  {
-    number: 8,
-    title: "Scale Profitably",
-    description:
-      "When the numbers work, we pour fuel on the fire — scaling what works and cutting what doesn't.",
-    icon: BarChart,
+      "Once we find what works, we scale aggressively to drive more leads and revenue for your business.",
+    icon: TrendingUp,
   },
 ];
 
 export const RESULTS = [
-  { value: 40, suffix: "+", label: "Years of Legacy", icon: TrendingUp },
-  { value: 100, suffix: "%", label: "Dedication", icon: Target },
-  { value: 24, suffix: "/7", label: "Support", icon: Headphones },
-];
-
-export const TESTIMONIALS = [
-  {
-    name: "Rajesh Kumar",
-    business: "Kumar Enterprises",
-    role: "Founder",
-    text: "Nagaara helped us generate more leads in one month than we got in the previous six months. The team understands local business like no one else.",
-    rating: 5,
-  },
-  {
-    name: "Priya Sharma",
-    business: "Sharma Healthcare",
-    role: "Director",
-    text: "The WhatsApp automation alone saved us hours every week. Our appointment bookings increased by 40% within the first month of working with Nagaara.",
-    rating: 5,
-  },
-  {
-    name: "Vikram Reddy",
-    business: "Reddy Foods",
-    role: "Owner",
-    text: "Our weekend bookings went from empty tables to a waitlist. Kalyan and his team truly understand how to make local businesses grow.",
-    rating: 5,
-  },
+  { value: "5-10", suffix: "/day", label: "Quality Leads", icon: Users },
+  { value: "40", suffix: "+", label: "Years of Trust", icon: Shield },
+  { value: "100", suffix: "%", label: "Transparency", icon: Eye },
+  { value: "24", suffix: "/7", label: "Support", icon: Headphones },
 ];
 
 export const WHY_CHOOSE = [
   {
     icon: Brain,
-    title: "We Understand Both Worlds",
+    title: "Performance Focused",
     description:
-      "Traditional marketing reached streets. Digital marketing reaches the world. Nagaara understands both — and that's something no other agency can offer.",
-  },
-  {
-    icon: Handshake,
-    title: "Legacy of Trust",
-    description:
-      "40 years of helping businesses get heard didn't happen by accident. It happened because results talk. That same commitment drives every campaign we run today.",
+      "We don't promise the moon. We promise measurable results — and then we deliver them.",
   },
   {
     icon: Shield,
     title: "Radical Transparency",
     description:
-      "You see every rupee spent, every lead generated, every result delivered. No black boxes. No vanity metrics. Just honest, measurable growth.",
+      "You see every rupee spent, every lead generated, every result delivered. No black boxes.",
   },
   {
     icon: Zap,
     title: "Speed Meets Strategy",
     description:
-      "We move fast because your business can't wait. But we never sacrifice strategy for speed. Every decision is backed by data and intent.",
-  },
-  {
-    icon: Target,
-    title: "Performance Over Promises",
-    description:
-      "We don't promise the moon. We promise measurable results — and then we deliver them. That's why clients stay.",
+      "We move fast because your business can't wait. But we never sacrifice strategy for speed.",
   },
   {
     icon: Headphones,
     title: "Always Reachable",
     description:
-      "Your dedicated strategist is one call away. Not a ticketing system. Not a chatbot. A real person who knows your business.",
+      "Your dedicated strategist is one call away. A real person who knows your business.",
   },
 ];
 
@@ -303,12 +201,7 @@ export const FAQS = [
   {
     question: "What makes Nagaara different from other agencies?",
     answer:
-      "Nagaara was born from a 40-year legacy of helping businesses get heard — starting with loudspeakers on the streets. We combine that deep understanding of local business with modern digital marketing expertise. No other agency has that foundation.",
-  },
-  {
-    question: "Do you work with businesses outside India?",
-    answer:
-      "Currently we focus on businesses in India where our deep understanding of the local market gives us a significant edge. However, we're open to discussions for businesses targeting Indian audiences globally.",
+      "Nagaara combines corporate marketing expertise from Dell with deep understanding of local business needs. We don't just run ads — we build systems that generate consistent leads and revenue.",
   },
 ];
 
@@ -319,20 +212,12 @@ export const SERVICES_FOR_FORM = [
   "Performance Marketing",
   "Lead Generation",
   "CRM Automation",
-  "Conversion Tracking",
-  "Marketing Analytics",
-  "Local Business Marketing",
   "Not Sure Yet",
 ];
 
-export const TRANSFORMATION_STEPS = [
-  { label: "Loudspeaker", emoji: "📢" },
-  { label: "Sound Waves", emoji: "🔊" },
-  { label: "Pixels", emoji: "✨" },
-  { label: "Facebook", emoji: "📘" },
-  { label: "Instagram", emoji: "📸" },
-  { label: "Google", emoji: "🔍" },
-  { label: "Analytics", emoji: "📊" },
-  { label: "Lead Gen", emoji: "🎯" },
-  { label: "NAGAARA", emoji: "🚀" },
+export const TRUST_STATS = [
+  { value: "5-10", suffix: "", label: "Leads/Day", icon: Users },
+  { value: "40", suffix: "+", label: "Years Legacy", icon: Shield },
+  { value: "100", suffix: "%", label: "Transparency", icon: Eye },
+  { value: "24", suffix: "/7", label: "Support", icon: Headphones },
 ];

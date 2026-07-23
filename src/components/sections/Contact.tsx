@@ -1,31 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
-  Send,
   Phone,
   Mail,
-  Building2,
-  MessageSquare,
-  CheckCircle2,
-  Loader2,
+  MessageCircle,
+  Clock,
+  CheckCircle,
+  ArrowRight,
+  Zap,
+  Shield,
+  Users,
 } from "lucide-react";
-import SectionHeading from "@/components/ui/SectionHeading";
-import Button from "@/components/ui/Button";
-import { useUTMTracking } from "@/hooks/useUTMTracking";
-import {
-  WHATSAPP_LINK,
-  EMAIL,
-  PHONE_DISPLAY,
-  SERVICES_FOR_FORM,
-} from "@/lib/constants";
+import { WHATSAPP_LINK, PHONE_DISPLAY, EMAIL, SERVICES_FOR_FORM } from "@/lib/constants";
 
 export default function Contact() {
-  const utm = useUTMTracking();
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     business: "",
@@ -34,325 +24,344 @@ export default function Contact() {
     service: "",
     message: "",
   });
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
+    setIsSubmitting(true);
     setError("");
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+      // Save to CRM
+      await fetch("/api/leads", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.business,
+          service: formData.service,
+          message: formData.message,
+          source: "website",
+        }),
+      });
+
+      // Submit to FormSubmit.co
+      await fetch("https://formsubmit.co/ajax/nagaara14@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
           business: formData.business,
           phone: formData.phone,
           email: formData.email,
-          service: formData.service || "Not specified",
-          message: formData.message || "No message provided",
-          utm_source: utm.utm_source || "direct",
-          utm_medium: utm.utm_medium || "none",
-          utm_campaign: utm.utm_campaign || "none",
-          utm_content: utm.utm_content || "",
-          landing_page: utm.landing_page || window.location.href,
-          submitted_at: new Date().toISOString(),
-          _subject: `[LEAD] ${formData.name} — ${formData.business}${utm.utm_campaign ? ` — Campaign: ${utm.utm_campaign}` : ""}`,
+          service: formData.service,
+          message: formData.message,
+          _captcha: "false",
+          _template: "table",
         }),
       });
 
-      if (res.ok) {
-        // Also save to CRM database
-        fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            phone: formData.phone,
-            email: formData.email,
-            business: formData.business,
-            service: formData.service || null,
-            message: formData.message || null,
-            source: "form",
-            utmSource: utm.utm_source || null,
-            utmMedium: utm.utm_medium || null,
-            utmCampaign: utm.utm_campaign || null,
-            utmTerm: utm.utm_term || null,
-            utmContent: utm.utm_content || null,
-          }),
-        }).catch(() => {});
-
-        setSubmitted(true);
-        setFormData({
-          name: "",
-          business: "",
-          phone: "",
-          email: "",
-          service: "",
-          message: "",
-        });
-      } else {
-        setError(
-          "Something went wrong. Please try again or reach us on WhatsApp."
-        );
-      }
+      setIsSuccess(true);
     } catch {
-      setError("Network error. Please try again or reach us on WhatsApp.");
+      setError("Something went wrong. Please try again or WhatsApp us directly.");
     } finally {
-      setSending(false);
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="relative py-32">
+    <section id="contact" className="relative py-32 overflow-hidden">
       <div className="absolute inset-0 bg-[#05070C]" />
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#F59E0B]/[0.02] rounded-full blur-[150px]" />
-      </div>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/20 to-transparent" />
+      <div className="absolute inset-0">
+        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#F59E0B]/[0.015] rounded-full blur-[150px]" />
+      </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-        <SectionHeading
-          tag="Contact"
-          title="Book a Free Consultation"
-          description="Ready to grow your business? Let's talk about how NAGAARA can help you generate more leads and sales."
-        />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-[#10B981]/10 border border-[#10B981]/15 rounded-full px-4 py-1.5 mb-6">
+            <span className="text-[#10B981] text-xs font-medium tracking-wide uppercase">
+              Limited Availability
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
+            Ready to Get{" "}
+            <span className="text-[#F59E0B]">More Leads?</span>
+          </h2>
+          <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">
+            Book your free strategy call today. We&apos;ll show you exactly how
+            we can help your business grow — no obligation, no sales pitch.
+          </p>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left — Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-6">
-              <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl p-8 backdrop-blur-sm">
-                <h3 className="text-xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
-                  Let&apos;s Start a Conversation
-                </h3>
-                <p className="text-[#94A3B8] leading-relaxed mb-8">
-                  Fill out the form and our team will get back to you within 24
-                  hours. Or reach out directly on WhatsApp for an instant
-                  response.
-                </p>
+            <h3 className="text-2xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
+              Why Book a Call?
+            </h3>
 
-                <div className="space-y-5">
-                  <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/15 flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-[#F59E0B]" />
-                    </div>
-                    <div>
-                      <div className="text-[#94A3B8] text-xs">Phone</div>
-                      <div className="text-white text-sm">{PHONE_DISPLAY}</div>
-                    </div>
+            <div className="space-y-6 mb-10">
+              {[
+                {
+                  icon: Zap,
+                  title: "Get a Custom Growth Plan",
+                  desc: "We'll analyze your business and show you exactly how to get more leads.",
+                  color: "#F59E0B",
+                },
+                {
+                  icon: Shield,
+                  title: "Transparent Pricing",
+                  desc: "No hidden fees. No contracts. You'll know exactly what you're paying for.",
+                  color: "#2563EB",
+                },
+                {
+                  icon: Users,
+                  title: "See Real Results",
+                  desc: "We'll show you examples of how we've helped businesses like yours grow.",
+                  color: "#10B981",
+                },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-4">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${item.color}15`, border: `1px solid ${item.color}25` }}
+                  >
+                    <item.icon className="w-5 h-5" style={{ color: item.color }} />
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/15 flex items-center justify-center">
-                      <Mail className="w-5 h-5 text-[#F59E0B]" />
-                    </div>
-                    <div>
-                      <div className="text-[#94A3B8] text-xs">Email</div>
-                      <div className="text-white text-sm">{EMAIL}</div>
-                    </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">{item.title}</h4>
+                    <p className="text-[#94A3B8] text-sm">{item.desc}</p>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                <div className="mt-8 space-y-3">
-                  <Button
-                    href={WHATSAPP_LINK}
-                    variant="primary"
-                    size="lg"
-                    className="w-full"
-                  >
-                    <MessageSquare className="w-5 h-5 mr-2" />
-                    Chat on WhatsApp
-                  </Button>
-                  <Button
-                    href={`mailto:${EMAIL}`}
-                    variant="secondary"
-                    size="lg"
-                    className="w-full"
-                  >
-                    <Mail className="w-5 h-5 mr-2" />
-                    Send Email
-                  </Button>
+            {/* Contact options */}
+            <div className="space-y-4">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 bg-[#10141F]/60 border border-white/[0.06] rounded-xl hover:border-[#10B981]/20 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-[#10B981]" />
                 </div>
+                <div>
+                  <p className="text-white font-bold">WhatsApp Us</p>
+                  <p className="text-[#94A3B8] text-sm">Instant reply — {PHONE_DISPLAY}</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-[#94A3B8] group-hover:text-[#10B981] group-hover:translate-x-1 transition-all ml-auto" />
+              </a>
+
+              <a
+                href={`tel:+919581184697`}
+                className="flex items-center gap-4 p-4 bg-[#10141F]/60 border border-white/[0.06] rounded-xl hover:border-[#2563EB]/20 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-[#2563EB]" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Call Us</p>
+                  <p className="text-[#94A3B8] text-sm">{PHONE_DISPLAY}</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-[#94A3B8] group-hover:text-[#2563EB] group-hover:translate-x-1 transition-all ml-auto" />
+              </a>
+
+              <a
+                href={`mailto:${EMAIL}`}
+                className="flex items-center gap-4 p-4 bg-[#10141F]/60 border border-white/[0.06] rounded-xl hover:border-[#F59E0B]/20 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-[#F59E0B]" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">Email Us</p>
+                  <p className="text-[#94A3B8] text-sm">{EMAIL}</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-[#94A3B8] group-hover:text-[#F59E0B] group-hover:translate-x-1 transition-all ml-auto" />
+              </a>
+            </div>
+
+            {/* Urgency */}
+            <div className="mt-8 p-4 bg-[#F59E0B]/5 border border-[#F59E0B]/10 rounded-xl">
+              <div className="flex items-center gap-2 text-[#F59E0B] mb-2">
+                <Clock className="w-4 h-4" />
+                <span className="font-bold text-sm">Limited Spots Available</span>
               </div>
+              <p className="text-[#94A3B8] text-sm">
+                We only take on 5 new clients per month to ensure quality service.
+                Book your call today to secure your spot.
+              </p>
             </div>
           </motion.div>
 
+          {/* Right — Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6 }}
           >
-            {submitted ? (
-              <div className="bg-[#10141F]/60 border border-[#F59E0B]/20 rounded-2xl p-12 text-center backdrop-blur-sm">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="w-16 h-16 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex items-center justify-center mx-auto mb-6"
-                >
-                  <CheckCircle2 className="w-8 h-8 text-[#F59E0B]" />
-                </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-space-grotesk)]">
-                  Thank You!
+            {isSuccess ? (
+              <div className="bg-[#10141F]/60 border border-[#10B981]/20 rounded-2xl p-12 text-center backdrop-blur-sm">
+                <div className="w-16 h-16 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-8 h-8 text-[#10B981]" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 font-[family-name:var(--font-space-grotesk)]">
+                  We&apos;ll Be In Touch!
                 </h3>
                 <p className="text-[#94A3B8] mb-6">
-                  We&apos;ve received your inquiry. Our team will get back to
-                  you within 24 hours.
+                  Thank you for your interest. Our team will reach out within 24
+                  hours to schedule your free strategy call.
                 </p>
-                <Button href={WHATSAPP_LINK} variant="secondary" size="sm">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Or chat on WhatsApp now
-                </Button>
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#10B981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  WhatsApp Us Now
+                </a>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
                 className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl p-8 backdrop-blur-sm"
               >
-                <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <h3 className="text-xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
+                  Book Your Free Strategy Call
+                </h3>
+
+                <div className="space-y-5">
                   <div>
-                    <label className="text-[#94A3B8] text-xs mb-2 block">
-                      Name *
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Your Name *
                     </label>
                     <input
                       type="text"
-                      name="name"
                       required
                       value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your Name"
-                      className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder-[#94A3B8]/30 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                      placeholder="John Doe"
                     />
                   </div>
+
                   <div>
-                    <label className="text-[#94A3B8] text-xs mb-2 block">
+                    <label className="block text-white text-sm font-medium mb-2">
                       Business Name *
                     </label>
-                    <div className="relative">
-                      <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]/30" />
+                    <input
+                      type="text"
+                      required
+                      value={formData.business}
+                      onChange={(e) => setFormData({ ...formData, business: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                      placeholder="Your Business Name"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        Phone *
+                      </label>
                       <input
-                        type="text"
-                        name="business"
+                        type="tel"
                         required
-                        value={formData.business}
-                        onChange={handleChange}
-                        placeholder="Your Business Name"
-                        className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl pl-11 pr-4 py-3 text-white text-sm placeholder-[#94A3B8]/30 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                        placeholder="you@email.com"
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 mb-4">
                   <div>
-                    <label className="text-[#94A3B8] text-xs mb-2 block">
-                      Phone *
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Service Interested In
                     </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+91 95811 84697"
-                      className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder-[#94A3B8]/30 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
+                    <select
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white focus:outline-none focus:border-[#F59E0B]/40 transition-colors appearance-none"
+                    >
+                      <option value="">Select a service</option>
+                      {SERVICES_FOR_FORM.map((service) => (
+                        <option key={service} value={service}>
+                          {service}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Tell Us About Your Business
+                    </label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={4}
+                      className="w-full px-4 py-3 bg-[#05070C] border border-white/[0.08] rounded-xl text-white placeholder-[#94A3B8]/40 focus:outline-none focus:border-[#F59E0B]/40 transition-colors resize-none"
+                      placeholder="What's your biggest challenge right now?"
                     />
                   </div>
-                  <div>
-                    <label className="text-[#94A3B8] text-xs mb-2 block">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="you@company.com"
-                      className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder-[#94A3B8]/30 focus:outline-none focus:border-[#F59E0B]/40 transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <label className="text-[#94A3B8] text-xs mb-2 block">
-                    Service Interested In
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-[#F59E0B]/40 transition-colors appearance-none cursor-pointer"
-                  >
-                    <option value="" className="bg-[#10141F]">
-                      Select a Service
-                    </option>
-                    {SERVICES_FOR_FORM.map((service) => (
-                      <option
-                        key={service}
-                        value={service}
-                        className="bg-[#10141F]"
-                      >
-                        {service}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="mb-6">
-                  <label className="text-[#94A3B8] text-xs mb-2 block">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={3}
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your business goals..."
-                    className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white text-sm placeholder-[#94A3B8]/30 focus:outline-none focus:border-[#F59E0B]/40 transition-colors resize-none"
-                  />
                 </div>
 
                 {error && (
-                  <div className="mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                    {error}
-                  </div>
+                  <p className="text-red-400 text-sm mt-4">{error}</p>
                 )}
 
-                <Button
+                <button
                   type="submit"
-                  variant="primary"
-                  size="lg"
-                  className="w-full"
+                  disabled={isSubmitting}
+                  className="w-full mt-6 px-8 py-4 bg-[#F59E0B] text-[#05070C] font-bold rounded-xl hover:bg-[#D97706] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {sending ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Sending...
-                    </>
+                  {isSubmitting ? (
+                    "Sending..."
                   ) : (
                     <>
-                      <Send className="w-4 h-4 mr-2" />
-                      Send Inquiry
+                      Book My Free Call
+                      <ArrowRight className="w-5 h-5" />
                     </>
                   )}
-                </Button>
+                </button>
+
+                <p className="text-[#94A3B8]/50 text-xs text-center mt-4">
+                  No spam. No sales pitch. Just a honest conversation about your business.
+                </p>
               </form>
             )}
           </motion.div>

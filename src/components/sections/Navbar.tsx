@@ -1,23 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import Button from "@/components/ui/Button";
-import { NAV_LINKS } from "@/lib/constants";
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { NAV_LINKS, WHATSAPP_LINK } from "@/lib/constants";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
+    if (isMobileOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -25,99 +25,114 @@ export default function Navbar() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobileOpen]);
+  }, [isMobileOpen]);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#05070C]/80 backdrop-blur-2xl border-b border-white/[0.04] shadow-2xl shadow-black/50"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <a href="#home" className="flex items-center gap-3 group">
-            <img
-              src="/images/LOGO.jpeg"
-              alt="NAGAARA"
-              className="h-10 w-auto"
-            />
-          </a>
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? "bg-[#05070C]/80 backdrop-blur-xl border-b border-white/[0.04]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <a href="#home" className="flex items-center gap-3">
+              <Image
+                src="/images/LOGO.jpeg"
+                alt="NAGAARA Logo"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
+              <span className="text-white font-bold text-xl font-[family-name:var(--font-space-grotesk)]">
+                NAGAARA
+              </span>
+            </a>
 
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-8">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-[#94A3B8] text-sm font-medium hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="hidden md:flex items-center gap-4">
               <a
-                key={link.label}
-                href={link.href}
-                className="text-sm text-[#94A3B8] hover:text-white transition-colors duration-300 relative group"
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 bg-[#F59E0B] text-[#05070C] font-bold text-sm rounded-lg hover:bg-[#D97706] transition-colors flex items-center gap-2"
               >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#F59E0B] group-hover:w-full transition-all duration-300" />
+                Book Free Call
+                <ArrowRight className="w-4 h-4" />
               </a>
-            ))}
-          </div>
+            </div>
 
-          <div className="hidden md:flex items-center gap-4">
-            <Button href="#contact" variant="primary" size="sm">
-              Book Free Strategy Call
-            </Button>
+            {/* Mobile Toggle */}
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden text-white p-2"
+            >
+              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-white p-2"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-      </div>
+      </motion.nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {isMobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#05070C]/95 backdrop-blur-2xl border-t border-white/[0.04]"
+            className="fixed inset-0 z-40 bg-[#05070C]/98 backdrop-blur-xl md:hidden"
           >
-            <div className="px-6 py-6 space-y-4">
+            <div className="flex flex-col items-center justify-center h-full gap-8">
               {NAV_LINKS.map((link, index) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="block text-[#94A3B8] hover:text-white transition-colors py-2 text-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => setIsMobileOpen(false)}
+                  className="text-white text-2xl font-bold font-[family-name:var(--font-space-grotesk)]"
                 >
                   {link.label}
                 </motion.a>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
+
+              <motion.a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.5 }}
+                className="mt-8 px-8 py-4 bg-[#F59E0B] text-[#05070C] font-bold rounded-xl text-lg flex items-center gap-2"
               >
-                <Button
-                  href="#contact"
-                  variant="primary"
-                  size="sm"
-                  className="w-full mt-4"
-                >
-                  Book Free Strategy Call
-                </Button>
-              </motion.div>
+                Book Free Call
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 }

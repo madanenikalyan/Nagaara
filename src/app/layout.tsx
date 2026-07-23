@@ -19,11 +19,11 @@ const siteUrl = "https://nagaara.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NAGAARA | 40 Years of Trust. One New Generation.",
+    default: "NAGAARA | Performance Marketing Agency",
     template: "%s | NAGAARA",
   },
   description:
-    "NAGAARA is a performance marketing agency continuing a 40-year legacy of helping businesses get heard. Meta Ads, Google Ads, Landing Pages, Lead Generation, and Performance Marketing.",
+    "NAGAARA is a performance marketing agency helping local businesses generate 5-10 qualified leads daily through Meta Ads, Google Ads, Landing Pages, and Performance Marketing.",
   keywords: [
     "digital marketing agency",
     "performance marketing",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "NAGAARA",
-    title: "NAGAARA | 40 Years of Trust. One New Generation.",
+    title: "NAGAARA | Performance Marketing Agency",
     description:
-      "From loudspeakers to algorithms. Continuing a 40-year legacy of helping businesses get heard through Meta Ads, Google Ads, and Performance Marketing.",
+      "Meta Ads, Google Ads & Landing Pages that generate 5-10 qualified leads daily for local businesses. No vanity metrics — only measurable growth.",
     images: [
       {
         url: `${siteUrl}/og-image.png`,
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NAGAARA | 40 Years of Trust. One New Generation.",
+    title: "NAGAARA | Performance Marketing Agency",
     description:
-      "From loudspeakers to algorithms. Performance marketing built on 40 years of legacy.",
+      "Meta Ads, Google Ads & Landing Pages that generate 5-10 qualified leads daily for local businesses.",
     images: [`${siteUrl}/og-image.png`],
   },
   robots: {
@@ -81,8 +81,8 @@ export const metadata: Metadata = {
     icon: "/images/Favicon.jpeg",
   },
   other: {
-    "copyright": "© 2026 NAGAARA. All rights reserved. Founded by Pavan Kalyan.",
-    "author": "Pavan Kalyan",
+    "copyright": "© 2026 NAGAARA. All rights reserved.",
+    "author": "NAGAARA",
   },
 };
 
@@ -91,12 +91,8 @@ const jsonLd = {
   "@type": "Organization",
   name: "NAGAARA",
   description:
-    "Performance marketing agency continuing a 40-year legacy of helping businesses get heard.",
+    "Performance marketing agency helping local businesses generate consistent leads through Meta Ads, Google Ads, and Landing Pages.",
   url: siteUrl,
-  founder: {
-    "@type": "Person",
-    name: "Pavan Kalyan",
-  },
   serviceType: [
     "Meta Ads Management",
     "Google Ads Management",

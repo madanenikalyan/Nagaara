@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, ArrowRight } from "lucide-react";
 import { NAV_LINKS, WHATSAPP_LINK, EMAIL, PHONE_DISPLAY } from "@/lib/constants";
 
 export default function Footer() {
@@ -11,6 +11,40 @@ export default function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/20 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-gradient-to-r from-[#F59E0B]/10 to-[#2563EB]/10 border border-[#F59E0B]/20 rounded-2xl p-8 mb-16 text-center"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-[family-name:var(--font-space-grotesk)]">
+            Ready to Get More Leads?
+          </h3>
+          <p className="text-[#94A3B8] mb-6 max-w-xl mx-auto">
+            Book your free strategy call today and see how we can help your business grow.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-[#F59E0B] text-[#05070C] font-bold rounded-xl hover:bg-[#D97706] transition-colors flex items-center gap-2"
+            >
+              <MessageCircle className="w-5 h-5" />
+              WhatsApp Us Now
+            </a>
+            <a
+              href="#contact"
+              className="px-6 py-3 bg-white/[0.05] border border-white/[0.1] text-white font-bold rounded-xl hover:bg-white/[0.1] transition-colors flex items-center gap-2"
+            >
+              Book Free Call
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </motion.div>
+
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -24,15 +58,17 @@ export default function Footer() {
                 alt="NAGAARA"
                 className="h-10 w-auto"
               />
+              <span className="text-white font-bold text-xl font-[family-name:var(--font-space-grotesk)]">
+                NAGAARA
+              </span>
             </div>
             <p className="text-[#94A3B8] text-sm leading-relaxed mb-4">
-              The voice that once echoed through the streets now helps businesses
-              grow online.
+              Performance Marketing Agency helping local businesses generate
+              consistent leads through Meta Ads, Google Ads, and Landing Pages.
             </p>
             <p className="text-[#94A3B8]/50 text-xs leading-relaxed">
-              From loudspeakers to algorithms. From announcements to performance
-              marketing. NAGAARA is the digital evolution of a 40-year legacy of
-              helping businesses get heard.
+              Data-driven strategies. Transparent pricing. Real results.
+              That&apos;s the NAGAARA difference.
             </p>
           </motion.div>
 
@@ -121,7 +157,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} NAGAARA. All rights reserved.
           </p>
           <p className="text-[#94A3B8]/30 text-xs">
-            Founded by Pavan Kalyan — Continuing the legacy of Nagaraju.
+            Performance Marketing Agency | Meta Ads | Google Ads
           </p>
         </div>
       </div>

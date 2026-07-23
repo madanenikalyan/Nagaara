@@ -1,12 +1,10 @@
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
-import Legacy from "@/components/sections/Legacy";
-import Founder from "@/components/sections/Founder";
-import Transformation from "@/components/sections/Transformation";
+import TrustBar from "@/components/sections/TrustBar";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
-import WhyNagaara from "@/components/sections/WhyNagaara";
 import Impact from "@/components/sections/Impact";
+import WhyNagaara from "@/components/sections/WhyNagaara";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -22,13 +20,11 @@ export default function Home() {
       <GrainOverlay />
       <Navbar />
       <Hero />
-      <Founder />
-      <Transformation />
+      <TrustBar />
       <Services />
       <Process />
-      <WhyNagaara />
       <Impact />
-      <Legacy />
+      <WhyNagaara />
       <FAQ />
       <Contact />
       <Footer />

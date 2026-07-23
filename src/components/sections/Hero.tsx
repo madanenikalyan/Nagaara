@@ -1,40 +1,13 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle, Play, Phone, CheckCircle } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { WHATSAPP_LINK } from "@/lib/constants";
-
-const ROTATING_WORDS = ["Digital Growth.", "Online Leads.", "Business Scale.", "Brand Reach."];
+import { WHATSAPP_LINK, PHONE_DISPLAY } from "@/lib/constants";
 
 export default function Hero() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springMouseX = useSpring(mouseX, { damping: 30, stiffness: 200 });
-  const springMouseY = useSpring(mouseY, { damping: 30, stiffness: 200 });
-  const gradientX = useTransform(springMouseX, [0, 1], [30, 70]);
-  const gradientY = useTransform(springMouseY, [0, 1], [30, 70]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      mouseX.set(e.clientX / window.innerWidth);
-      mouseY.set(e.clientY / window.innerHeight);
-    };
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, [mouseX, mouseY]);
-
   return (
     <section
       id="home"
@@ -42,48 +15,49 @@ export default function Hero() {
     >
       <div className="absolute inset-0 bg-[#05070C]" />
 
-      {/* Mouse-following gradient */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          background: useTransform(
-            [gradientX, gradientY],
-            ([x, y]) =>
-              `radial-gradient(ellipse 600px 600px at ${x}% ${y}%, rgba(245,158,11,0.06), transparent)`
-          ),
-        }}
-      />
+      {/* Logo watermark background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <Image
+          src="/images/LOGO.jpeg"
+          alt=""
+          width={1000}
+          height={1000}
+          className="w-[90vw] max-w-[800px] h-auto opacity-[0.03]"
+          style={{ filter: "grayscale(100%) brightness(2)" }}
+          priority={false}
+        />
+      </div>
 
+      {/* Gradient accents */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#F59E0B]/[0.025] rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-[#2563EB]/[0.015] rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#F59E0B]/[0.02] rounded-full blur-[150px] animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#2563EB]/[0.015] rounded-full blur-[130px]" />
         <div className="grid-pattern absolute inset-0" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+          {/* Left — Main Content */}
           <div>
+            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-8"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-[#F59E0B] text-sm font-medium backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/20 text-[#F59E0B] text-sm font-medium backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
-                Continuing a Legacy Since 1984
+                Performance Marketing Agency
               </span>
             </motion.div>
 
+            {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="font-[family-name:var(--font-space-grotesk)] text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-8"
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-[family-name:var(--font-space-grotesk)] text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight mb-6"
             >
               <motion.span
                 className="text-white block"
@@ -91,7 +65,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                40 Years of Trust.
+                Turn Clicks Into
               </motion.span>
               <motion.span
                 className="text-gradient-gold block mt-2"
@@ -99,53 +73,47 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >
-                One New Generation.
+                Paying Customers.
               </motion.span>
             </motion.h1>
 
+            {/* Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="text-lg md:text-xl text-[#94A3B8] max-w-xl mb-12 leading-relaxed"
+              className="text-lg md:text-xl text-[#94A3B8] max-w-xl mb-8 leading-relaxed"
             >
-              My father spent four decades helping local businesses become heard
-              through traditional public announcements. Today{" "}
-              <span className="text-white font-medium">NAGAARA</span> helps
-              businesses grow through Meta Ads, Google Ads, Landing Pages and
-              Performance Marketing.
+              Meta Ads, Google Ads & Landing Pages that generate{" "}
+              <span className="text-white font-medium">5-10 qualified leads daily</span> for
+              local businesses. No vanity metrics — only measurable growth.
             </motion.p>
 
-            {/* Rotating service text */}
+            {/* Trust points */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.1 }}
-              className="mb-12 flex items-center gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+              className="mb-10 space-y-3"
             >
-              <span className="text-[#94A3B8]/50 text-sm">We build</span>
-              <div className="h-7 overflow-hidden relative">
-                <motion.div
-                  animate={{ y: `-${wordIndex * 100}%` }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {ROTATING_WORDS.map((word) => (
-                    <div
-                      key={word}
-                      className="h-7 flex items-center text-[#F59E0B] font-semibold text-lg font-[family-name:var(--font-space-grotesk)]"
-                    >
-                      {word}
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
+              {[
+                "Free strategy call — no sales pitch",
+                "Transparent pricing — see every rupee spent",
+                "Daily optimization — we never stop improving",
+              ].map((point, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#10B981] flex-shrink-0" />
+                  <span className="text-[#94A3B8] text-sm">{point}</span>
+                </div>
+              ))}
             </motion.div>
 
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col sm:flex-row items-start gap-4 mb-16"
+              className="flex flex-col sm:flex-row items-start gap-4 mb-10"
             >
               <MagneticButton>
                 <Button href="#contact" variant="primary" size="lg">
@@ -161,98 +129,70 @@ export default function Hero() {
               </MagneticButton>
             </motion.div>
 
+            {/* Phone */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 1.8 }}
-              className="flex items-center gap-2 text-[#94A3B8]/30"
+              transition={{ duration: 1, delay: 1.4 }}
+              className="flex items-center gap-3 text-[#94A3B8]/50"
             >
-              <span className="text-xs tracking-widest uppercase">Scroll</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ChevronDown size={16} />
-              </motion.div>
+              <Phone className="w-4 h-4" />
+              <span className="text-sm">Or call us at</span>
+              <a href="tel:+919581184697" className="text-white font-medium hover:text-[#F59E0B] transition-colors">
+                {PHONE_DISPLAY}
+              </a>
             </motion.div>
           </div>
 
+          {/* Right — Visual + Stats */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{
-              duration: 1,
-              delay: 0.6,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative">
-              <div className="absolute -inset-12 bg-[#F59E0B]/[0.04] rounded-full blur-3xl" />
-
-              {/* Animated ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-6 border border-dashed border-[#F59E0B]/10 rounded-3xl"
-              />
-
-              <div className="relative museum-frame rounded-2xl overflow-hidden bg-[#10141F]">
-                <div className="relative p-3">
-                  <div className="relative rounded-xl overflow-hidden">
-                    <Image
-                      src="/images/nagaraju-legacy.jpeg"
-                      alt="Nagaraju - The Legacy of 40 Years of Public Announcements"
-                      width={500}
-                      height={600}
-                      className="w-full h-auto max-w-[420px] object-cover"
-                      priority
-                      style={{
-                        filter: "sepia(15%) contrast(1.05) brightness(1.05)",
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#05070C]/60 via-transparent to-[#05070C]/20" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#05070C]/20 to-transparent" />
-                  </div>
+            <div className="relative w-full max-w-md">
+              {/* Stats card */}
+              <div className="bg-[#10141F]/80 border border-white/[0.06] rounded-3xl p-8 backdrop-blur-xl">
+                <div className="text-center mb-8">
+                  <span className="text-6xl md:text-7xl font-bold text-[#F59E0B] font-[family-name:var(--font-space-grotesk)]">
+                    5-10
+                  </span>
+                  <p className="text-[#94A3B8] text-lg mt-2">Leads Per Day</p>
                 </div>
 
-                <div className="px-6 pb-5 pt-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-white/90 text-sm font-medium">
-                        The Legacy
-                      </p>
-                      <p className="text-[#94A3B8]/60 text-xs mt-0.5">
-                        40 Years of Helping Businesses Get Heard
-                      </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: "Meta Ads", color: "#2563EB" },
+                    { label: "Google Ads", color: "#10B981" },
+                    { label: "Landing Pages", color: "#F59E0B" },
+                    { label: "Lead Gen", color: "#8B5CF6" },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 text-center"
+                    >
+                      <div className="w-2 h-2 rounded-full mx-auto mb-2" style={{ backgroundColor: item.color }} />
+                      <span className="text-white text-xs font-medium">{item.label}</span>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex items-center justify-center">
-                      <span className="text-[#F59E0B] text-xs font-bold">
-                        N
-                      </span>
-                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                  <div className="flex items-center justify-center gap-2 text-[#10B981]">
+                    <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+                    <span className="text-sm font-medium">Currently accepting new clients</span>
                   </div>
                 </div>
               </div>
 
-              {/* Floating accent with pulse */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-gradient-to-br from-[#F59E0B]/20 to-[#D97706]/10 border border-[#F59E0B]/20 backdrop-blur-xl flex items-center justify-center animate-pulse-glow"
-              >
-                <span className="text-2xl">📢</span>
-              </motion.div>
-
               {/* Floating badge */}
               <motion.div
-                animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-3 -left-3 px-4 py-2 rounded-xl bg-[#10141F]/80 border border-white/[0.06] backdrop-blur-xl"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 px-4 py-2 rounded-xl bg-[#10B981]/10 border border-[#10B981]/20 backdrop-blur-xl"
               >
-                <span className="text-[#F59E0B] text-xs font-bold font-[family-name:var(--font-space-grotesk)]">
-                  est. 1984
-                </span>
+                <span className="text-[#10B981] text-xs font-bold">Free Audit</span>
               </motion.div>
             </div>
           </motion.div>

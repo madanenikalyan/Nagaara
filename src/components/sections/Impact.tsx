@@ -2,129 +2,108 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import SectionHeading from "@/components/ui/SectionHeading";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
-import { RESULTS } from "@/lib/constants";
+import { Users, TrendingUp, BarChart3, Target } from "lucide-react";
 
-const METRIC_BARS = [
-  { label: "Meta Ads", value: 92, color: "from-[#F59E0B] to-[#D97706]" },
-  { label: "Google Ads", value: 88, color: "from-[#2563EB] to-[#1D4ED8]" },
-  { label: "Landing Pages", value: 95, color: "from-[#F59E0B] to-[#FBBF24]" },
-  { label: "Lead Generation", value: 90, color: "from-[#2563EB] to-[#3B82F6]" },
+const expertise = [
+  { label: "Meta Ads", level: 95, color: "#2563EB" },
+  { label: "Google Ads", level: 90, color: "#10B981" },
+  { label: "Landing Pages", level: 92, color: "#F59E0B" },
+  { label: "Lead Generation", level: 88, color: "#8B5CF6" },
 ];
 
-function MetricBar({
-  label,
-  value,
-  color,
-  delay,
-}: {
-  label: string;
-  value: number;
-  color: string;
-  delay: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center center"],
-  });
-  const width = useTransform(scrollYProgress, [0, 1], ["0%", `${value}%`]);
-
-  return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex items-center justify-between">
-        <span className="text-white text-sm font-medium">{label}</span>
-        <span className="text-[#F59E0B] text-sm font-bold font-[family-name:var(--font-space-grotesk)]">
-          {value}%
-        </span>
-      </div>
-      <div className="h-2 bg-white/[0.04] rounded-full overflow-hidden">
-        <motion.div
-          style={{ width }}
-          transition={{ duration: 1, delay }}
-          className={`h-full rounded-full bg-gradient-to-r ${color}`}
-        />
-      </div>
-    </div>
-  );
-}
-
 export default function Impact() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
   return (
-    <section id="results" className="relative py-32">
+    <section id="results" className="relative py-32 overflow-hidden">
       <div className="absolute inset-0 bg-[#05070C]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/20 to-transparent" />
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#F59E0B]/[0.02] rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#2563EB]/[0.015] rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#2563EB]/[0.015] rounded-full blur-[150px]" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-        <SectionHeading
-          tag="Impact"
-          title="Built on Dedication"
-          description="Numbers that reflect our commitment — not vanity metrics, but the values we stand for."
-        />
-
-        {/* Primary counters */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {RESULTS.map((result, index) => (
-            <motion.div
-              key={result.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -4 }}
-              className="relative group"
-            >
-              <div className="bg-[#10141F]/60 border border-white/[0.06] rounded-2xl p-10 text-center backdrop-blur-sm hover:border-[#F59E0B]/15 transition-all duration-500 hover:bg-[#10141F]/80">
-                <motion.div
-                  whileInView={{ scale: [0, 1.2, 1] }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
-                  className="w-14 h-14 rounded-2xl bg-[#F59E0B]/10 border border-[#F59E0B]/15 flex items-center justify-center mx-auto mb-6"
-                >
-                  <result.icon className="w-7 h-7 text-[#F59E0B]" />
-                </motion.div>
-                <div className="text-5xl md:text-6xl font-bold text-white mb-3 font-[family-name:var(--font-space-grotesk)]">
-                  <AnimatedCounter
-                    value={result.value}
-                    suffix={result.suffix}
-                  />
-                </div>
-                <div className="text-[#94A3B8] text-sm font-medium uppercase tracking-wider">
-                  {result.label}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Service expertise bars */}
+      <div ref={containerRef} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="bg-[#10141F]/40 border border-white/[0.04] rounded-2xl p-8 md:p-10 backdrop-blur-sm"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h3 className="text-lg font-bold text-white mb-8 font-[family-name:var(--font-space-grotesk)]">
+          <div className="inline-flex items-center gap-2 bg-[#F59E0B]/10 border border-[#F59E0B]/15 rounded-full px-4 py-1.5 mb-6">
+            <span className="text-[#F59E0B] text-xs font-medium tracking-wide uppercase">
+              Our Results
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-[family-name:var(--font-space-grotesk)]">
+            Results That{" "}
+            <span className="text-[#F59E0B]">Speak for Themselves</span>
+          </h2>
+          <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto leading-relaxed">
+            We don&apos;t just talk about results — we deliver them. Here&apos;s
+            the impact we&apos;re committed to making for your business.
+          </p>
+        </motion.div>
+
+        {/* Expertise bars */}
+        <div className="max-w-3xl mx-auto">
+          <motion.h3
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-xl font-bold text-white mb-8 font-[family-name:var(--font-space-grotesk)]"
+          >
             Our Expertise
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {METRIC_BARS.map((bar, index) => (
-              <MetricBar
-                key={bar.label}
-                label={bar.label}
-                value={bar.value}
-                color={bar.color}
-                delay={index * 0.1}
-              />
+          </motion.h3>
+
+          <div className="space-y-6">
+            {expertise.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="flex justify-between mb-2">
+                  <span className="text-white font-medium">{item.label}</span>
+                  <span style={{ color: item.color }} className="font-bold">
+                    {item.level}%
+                  </span>
+                </div>
+                <div className="h-3 bg-white/[0.05] rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${item.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
+                    className="h-full rounded-full"
+                    style={{ backgroundColor: item.color }}
+                  />
+                </div>
+              </motion.div>
             ))}
           </div>
-          <p className="text-[#94A3B8]/40 text-xs mt-8 italic">
-            *Expertise levels represent our team&apos;s proficiency and focus areas.
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-[#94A3B8] text-sm">
+            Want to see how we can help your business?{" "}
+            <a href="#contact" className="text-[#F59E0B] hover:underline">
+              Book a free consultation
+            </a>
           </p>
         </motion.div>
       </div>

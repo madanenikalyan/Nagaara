@@ -121,6 +121,30 @@ export default function Legacy() {
   return (
     <section id="legacy" className="relative py-32 overflow-hidden">
       <div className="absolute inset-0 bg-[#05070C]" />
+      
+      {/* Legacy image as watermark background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          ref={photoRef}
+          style={{ y: photoY, scale: photoScale }}
+          className="absolute inset-0 flex items-center justify-center"
+        >
+          <Image
+            src="/images/nagaraju-legacy.jpeg"
+            alt="Legacy background"
+            width={1200}
+            height={800}
+            className="w-full h-full object-cover opacity-[0.03]"
+            style={{
+              filter: "sepia(20%) contrast(1.2) brightness(0.8)",
+            }}
+          />
+        </motion.div>
+        {/* Vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#05070C] via-transparent to-[#05070C]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#05070C] via-transparent to-[#05070C]" />
+      </div>
+      
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/20 to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
@@ -130,79 +154,18 @@ export default function Legacy() {
           description="Before NAGAARA, there was a man, a loudspeaker, and a mission to help businesses get heard. That 40-year legacy is the foundation everything is built on."
         />
 
-        {/* Premium photo showcase with parallax */}
+        {/* Legacy caption */}
         <motion.div
-          ref={photoRef}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-24 flex justify-center"
+          transition={{ duration: 0.8 }}
+          className="mb-16 text-center"
         >
-          <div className="relative max-w-2xl w-full">
-            {/* Ambient glow layers */}
-            <div className="absolute -inset-16 bg-[#F59E0B]/[0.03] rounded-full blur-[100px]" />
-            <div className="absolute -inset-8 bg-[#2563EB]/[0.02] rounded-full blur-[80px]" />
-
-            <motion.div
-              style={{ y: photoY, scale: photoScale }}
-              className="relative"
-            >
-              <div className="museum-frame rounded-2xl overflow-hidden bg-[#10141F]">
-                <div className="relative p-4">
-                  <div className="relative rounded-xl overflow-hidden group">
-                    <Image
-                      src="/images/nagaraju-legacy.jpeg"
-                      alt="Nagaraju — 40 years of helping businesses get heard through public announcements"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-cover transition-transform duration-[2s] group-hover:scale-105"
-                      style={{
-                        filter:
-                          "sepia(12%) contrast(1.08) brightness(1.03) saturate(1.1)",
-                      }}
-                    />
-                    {/* Cinematic overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#05070C]/70 via-[#05070C]/10 to-[#05070C]/20" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#05070C]/20 to-transparent" />
-
-                    {/* Scan line effect */}
-                    <motion.div
-                      animate={{ y: ["0%", "100%"] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                      className="absolute left-0 right-0 h-px bg-[#F59E0B]/10"
-                    />
-                  </div>
-                </div>
-                <div className="px-8 pb-6 pt-2">
-                  <TextReveal
-                    text="The voice that once echoed through the streets."
-                    className="text-white/80 text-sm italic"
-                    delay={0.2}
-                  />
-                  <div className="flex items-center gap-3 mt-3">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.5 }}
-                      className="h-px flex-1 bg-[#F59E0B]/20"
-                    />
-                    <span className="text-[#F59E0B]/60 text-xs tracking-wider uppercase whitespace-nowrap">
-                      est. 1984
-                    </span>
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.7 }}
-                      className="h-px flex-1 bg-[#F59E0B]/20"
-                    />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          <p className="text-[#94A3B8] text-lg italic max-w-2xl mx-auto">
+            &ldquo;The voice that once echoed through the streets now helps
+            businesses grow online.&rdquo;
+          </p>
         </motion.div>
 
         {/* Timeline */}
@@ -223,10 +186,6 @@ export default function Legacy() {
           transition={{ duration: 0.8 }}
           className="mt-24 text-center"
         >
-          <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-white/80 italic max-w-3xl mx-auto leading-relaxed font-[family-name:var(--font-space-grotesk)]">
-            &ldquo;The voice that once echoed through the streets now helps
-            businesses grow online.&rdquo;
-          </blockquote>
           <div className="mt-8 flex items-center justify-center gap-4">
             <div className="h-px w-12 bg-[#F59E0B]/40" />
             <span className="text-[#F59E0B] text-sm font-medium tracking-wider uppercase">
